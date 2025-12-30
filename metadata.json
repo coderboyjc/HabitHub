@@ -1,0 +1,5 @@
+{
+  "name": "HabitHub",
+  "description": "A habit tracking application featuring heatmaps, customizable habits, and detailed statistics, styled with Tailwind CSS.",
+  "requestFramePermissions": []
+}
