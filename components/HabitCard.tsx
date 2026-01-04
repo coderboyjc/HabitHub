@@ -17,19 +17,19 @@ const HabitCard: React.FC<HabitCardProps> = ({ habit, onToggle, onClick }) => {
 
   // Determine color class for the icon container
   const colorClass = COLORS[habit.color];
-  
+
   const handleCheck = (e: React.MouseEvent) => {
     e.stopPropagation();
     onToggle(habit.id, today);
   };
 
   return (
-    <div 
-      className="bg-card rounded-2xl p-4 mb-4 border border-zinc-800/50 hover:border-zinc-700 transition-all group"
+    <div
+      className="bg-card rounded-2xl p-3 sm:p-4 border border-zinc-800/50 hover:border-zinc-700 transition-all group"
     >
-      <div 
+      <div
         onClick={() => onClick(habit)}
-        className="flex justify-between items-start mb-4 cursor-pointer"
+        className="flex justify-between items-start mb-2 cursor-pointer"
       >
         <div className="flex items-center gap-4">
           <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${colorClass}`}>
@@ -40,7 +40,7 @@ const HabitCard: React.FC<HabitCardProps> = ({ habit, onToggle, onClick }) => {
             <p className="text-sm text-zinc-400 font-medium">{habit.description}</p>
           </div>
         </div>
-        
+
         <button
           onClick={handleCheck}
           className={`
@@ -50,15 +50,15 @@ const HabitCard: React.FC<HabitCardProps> = ({ habit, onToggle, onClick }) => {
           style={isCompletedToday ? { backgroundColor: colorClass.split(' ')[0].replace('bg-', 'var(--tw-colors-') } : {}}
         >
           <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${isCompletedToday ? colorClass : ''}`}>
-             {isCompletedToday ? <Check size={28} strokeWidth={4} /> : null}
+            {isCompletedToday ? <Check size={28} strokeWidth={4} /> : null}
           </div>
         </button>
       </div>
 
       <div className="pt-2">
-        <Heatmap 
-            completedDates={habit.completedDates} 
-            color={habit.color} 
+        <Heatmap
+          completedDates={habit.completedDates}
+          color={habit.color}
         />
       </div>
     </div>

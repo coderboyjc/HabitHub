@@ -1,12 +1,12 @@
 import React from 'react';
-import { 
-  Activity, 
-  Footprints, 
-  Code, 
-  Utensils, 
-  BookOpen, 
-  Droplets, 
-  Moon, 
+import {
+  Activity,
+  Footprints,
+  Code,
+  Utensils,
+  BookOpen,
+  Droplets,
+  Moon,
   Sun,
   Dumbbell,
   Music,
@@ -67,7 +67,7 @@ export const INITIAL_HABITS: any[] = [
     description: 'train to run',
     icon: 'activity',
     color: 'green',
-    completedDates: [] 
+    completedDates: []
   },
   {
     id: '2',
@@ -99,7 +99,7 @@ export const INITIAL_HABITS: any[] = [
 const generateHistory = (habitId: string) => {
   const dates = [];
   const today = new Date();
-  for (let i = 0; i < 90; i++) {
+  for (let i = 0; i < 100; i++) {
     const d = new Date();
     d.setDate(today.getDate() - i);
     // Random completion based on habit ID to make them look different
