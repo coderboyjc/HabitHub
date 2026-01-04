@@ -82,7 +82,7 @@ const App: React.FC = () => {
       </header>
 
       {/* Main Content */}
-      <main className="pt-24 px-4 max-w-2xl mx-auto">
+      <main className="pt-20 px-4 max-w-2xl mx-auto">
         <div className="space-y-2">
           {habits.map(habit => (
             <HabitCard

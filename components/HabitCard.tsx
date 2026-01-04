@@ -25,11 +25,11 @@ const HabitCard: React.FC<HabitCardProps> = ({ habit, onToggle, onClick }) => {
 
   return (
     <div
-      className="bg-card rounded-2xl p-3 sm:p-4 border border-zinc-800/50 hover:border-zinc-700 transition-all group"
+      className="bg-card rounded-2xl p-2 sm:p-4 border border-zinc-800/50 hover:border-zinc-700 transition-all group"
     >
       <div
         onClick={() => onClick(habit)}
-        className="flex justify-between items-start mb-2 cursor-pointer"
+        className="flex justify-between items-start mb-1 cursor-pointer"
       >
         <div className="flex items-center gap-4">
           <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${colorClass}`}>
@@ -55,7 +55,7 @@ const HabitCard: React.FC<HabitCardProps> = ({ habit, onToggle, onClick }) => {
         </button>
       </div>
 
-      <div className="pt-2">
+      <div className="pt-1">
         <Heatmap
           completedDates={habit.completedDates}
           color={habit.color}
