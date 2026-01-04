@@ -16,7 +16,7 @@ const Heatmap: React.FC<HeatmapProps> = ({ completedDates, color, days = 365, si
   const gridData = useMemo(() => {
     const data = [];
     const today = new Date();
-    
+
     // Create grid data for N days ending today
     for (let i = 0; i < days; i++) {
       const d = new Date();
@@ -40,9 +40,9 @@ const Heatmap: React.FC<HeatmapProps> = ({ completedDates, color, days = 365, si
   const activeColor = COLOR_Hex[color];
 
   return (
-    <div 
-        ref={scrollRef} 
-        className="w-full overflow-x-auto no-scrollbar pt-2 pb-2"
+    <div
+      ref={scrollRef}
+      className="w-full overflow-x-auto no-scrollbar pt-1 pb-1"
     >
       <div className={`grid grid-rows-7 grid-flow-col gap-[3px] ${size === 'lg' ? 'gap-[4px]' : ''} w-max px-1`}>
         {gridData.map((day) => (
