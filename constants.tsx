@@ -28,6 +28,16 @@ export const COLORS: Record<HabitColor, string> = {
   red: 'bg-red-500 text-red-50',
   orange: 'bg-orange-500 text-orange-50',
   cyan: 'bg-cyan-500 text-cyan-950',
+  lime: 'bg-lime-500 text-lime-950',
+  emerald: 'bg-emerald-500 text-emerald-50',
+  teal: 'bg-teal-500 text-teal-50',
+  sky: 'bg-sky-500 text-sky-950',
+  indigo: 'bg-indigo-500 text-indigo-50',
+  violet: 'bg-violet-500 text-violet-50',
+  fuchsia: 'bg-fuchsia-500 text-fuchsia-50',
+  rose: 'bg-rose-500 text-rose-50',
+  amber: 'bg-amber-500 text-amber-950',
+  slate: 'bg-slate-500 text-slate-50',
 };
 
 export const COLOR_Hex: Record<HabitColor, string> = {
@@ -39,6 +49,16 @@ export const COLOR_Hex: Record<HabitColor, string> = {
   red: '#ef4444',
   orange: '#f97316',
   cyan: '#06b6d4',
+  lime: '#84cc16',
+  emerald: '#10b981',
+  teal: '#14b8a6',
+  sky: '#0ea5e9',
+  indigo: '#6366f1',
+  violet: '#8b5cf6',
+  fuchsia: '#d946ef',
+  rose: '#f43f5e',
+  amber: '#f59e0b',
+  slate: '#64748b',
 };
 
 export const ICONS: Record<string, React.FC<any>> = {
@@ -63,9 +83,9 @@ export const ICONS: Record<string, React.FC<any>> = {
 export const INITIAL_HABITS: any[] = [
   {
     id: '1',
-    name: 'Running',
-    description: 'train to run',
-    icon: 'activity',
+    name: 'eating clean',
+    description: 'no junk food',
+    icon: 'utensils',
     color: 'green',
     completedDates: []
   },
@@ -75,22 +95,6 @@ export const INITIAL_HABITS: any[] = [
     description: 'daily steps',
     icon: 'footprints',
     color: 'yellow',
-    completedDates: []
-  },
-  {
-    id: '3',
-    name: 'coding',
-    description: 'learning to code',
-    icon: 'code',
-    color: 'pink',
-    completedDates: []
-  },
-  {
-    id: '4',
-    name: 'eating clean',
-    description: 'no junk food',
-    icon: 'utensils',
-    color: 'blue',
     completedDates: []
   }
 ];

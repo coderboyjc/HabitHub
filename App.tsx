@@ -1,15 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Settings, BarChart2, Plus } from 'lucide-react';
-import { Habit, ViewState } from './types';
+import { Habit, ViewState, NavigationScreen, JournalEntry } from './types';
 import { INITIAL_HABITS } from './constants';
+import { useLocalStorage } from './hooks/useLocalStorage';
 import HabitCard from './components/HabitCard';
 import HabitForm from './components/HabitForm';
 import HabitDetail from './components/HabitDetail';
+import DynamicIsland from './components/DynamicIsland';
+import WeeklyView from './components/WeeklyView';
+import MonthlyView from './components/MonthlyView';
+import JournalView from './components/JournalView';
 
 const App: React.FC = () => {
-  const [habits, setHabits] = useState<Habit[]>(INITIAL_HABITS);
+  const [habits, setHabits] = useLocalStorage<Habit[]>('habithub-habits', INITIAL_HABITS);
   const [view, setView] = useState<ViewState>('list');
   const [activeHabitId, setActiveHabitId] = useState<string | null>(null);
+  const [activeScreen, setActiveScreen] = useState<NavigationScreen>('habits');
+  const [journalEntries, setJournalEntries] = useLocalStorage<JournalEntry[]>('habithub-journal', []);
 
   const activeHabit = habits.find(h => h.id === activeHabitId);
 
@@ -52,8 +59,69 @@ const App: React.FC = () => {
     setView('list');
   };
 
+  const handleAddJournalEntry = (entry: Omit<JournalEntry, 'id' | 'createdAt'>) => {
+    const newEntry: JournalEntry = {
+      ...entry,
+      id: Date.now().toString(),
+      createdAt: new Date().toISOString()
+    };
+    setJournalEntries(prev => [newEntry, ...prev]);
+  };
+
+  const handleDeleteJournalEntry = (id: string) => {
+    setJournalEntries(prev => prev.filter(e => e.id !== id));
+  };
+
+  // Render the appropriate screen based on activeScreen
+  const renderScreen = () => {
+    switch (activeScreen) {
+      case 'weekly':
+        return (
+          <WeeklyView
+            habits={habits}
+            onToggle={toggleHabitCompletion}
+          />
+        );
+      case 'monthly':
+        return (
+          <MonthlyView
+            habits={habits}
+            onToggle={toggleHabitCompletion}
+          />
+        );
+      case 'journal':
+        return (
+          <JournalView
+            habits={habits}
+            entries={journalEntries}
+            onAddEntry={handleAddJournalEntry}
+            onDeleteEntry={handleDeleteJournalEntry}
+          />
+        );
+      case 'habits':
+      default:
+        return (
+          <div className="space-y-2">
+            {habits.map(habit => (
+              <HabitCard
+                key={habit.id}
+                habit={habit}
+                onToggle={toggleHabitCompletion}
+                onClick={(h) => { setActiveHabitId(h.id); setView('detail'); }}
+              />
+            ))}
+            {habits.length === 0 && (
+              <div className="text-center py-20 text-zinc-600">
+                <p>No habits yet. Click + to start.</p>
+              </div>
+            )}
+          </div>
+        );
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-background text-zinc-100 font-sans pb-24 selection:bg-purple-500/30">
+    <div className="min-h-screen bg-background text-zinc-100 font-sans pb-28 selection:bg-purple-500/30">
 
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-30 bg-background/80 backdrop-blur-md border-b border-zinc-800/50">
@@ -83,22 +151,14 @@ const App: React.FC = () => {
 
       {/* Main Content */}
       <main className="pt-20 px-4 max-w-2xl mx-auto">
-        <div className="space-y-2">
-          {habits.map(habit => (
-            <HabitCard
-              key={habit.id}
-              habit={habit}
-              onToggle={toggleHabitCompletion}
-              onClick={(h) => { setActiveHabitId(h.id); setView('detail'); }}
-            />
-          ))}
-          {habits.length === 0 && (
-            <div className="text-center py-20 text-zinc-600">
-              <p>No habits yet. Click + to start.</p>
-            </div>
-          )}
-        </div>
+        {renderScreen()}
       </main>
+
+      {/* Dynamic Island Navigation */}
+      <DynamicIsland
+        activeScreen={activeScreen}
+        onScreenChange={setActiveScreen}
+      />
 
       {/* Modals */}
       {(view === 'create' || view === 'edit') && (
@@ -115,6 +175,7 @@ const App: React.FC = () => {
           onClose={() => { setActiveHabitId(null); setView('list'); }}
           onEdit={() => setView('edit')}
           onToggle={toggleHabitCompletion}
+          onDelete={handleDeleteHabit}
         />
       )}
 
