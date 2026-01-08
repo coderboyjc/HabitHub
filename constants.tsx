@@ -83,17 +83,17 @@ export const ICONS: Record<string, React.FC<any>> = {
 export const INITIAL_HABITS: any[] = [
   {
     id: '1',
-    name: 'eating clean',
-    description: 'no junk food',
+    name: 'Eating clean',
+    description: 'No junk food',
     icon: 'utensils',
     color: 'green',
     completedDates: []
   },
   {
     id: '2',
-    name: 'walk',
-    description: 'daily steps',
-    icon: 'footprints',
+    name: 'Exercise',
+    description: 'Daily workout',
+    icon: 'dumbbell',
     color: 'yellow',
     completedDates: []
   }
