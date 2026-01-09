@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Habit, HabitColor } from '../types';
 import { ICONS, COLORS } from '../constants';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, ChevronRight, ChevronDown } from 'lucide-react';
+import IconPicker from './IconPicker';
 
 interface HabitFormProps {
   initialData?: Habit;
@@ -23,10 +24,10 @@ const HabitForm: React.FC<HabitFormProps> = ({ initialData, onSave, onClose }) =
   const [name, setName] = useState(initialData?.name || '');
   const [description, setDescription] = useState(initialData?.description || '');
   const [color, setColor] = useState<HabitColor>(initialData?.color || 'green');
-  const [iconIndex, setIconIndex] = useState(initialData ? ICON_KEYS.indexOf(initialData.icon) : 0);
+  const [icon, setIcon] = useState(initialData?.icon || 'activity');
+  const [showIconPicker, setShowIconPicker] = useState(false);
 
-  const currentIconKey = ICON_KEYS[iconIndex];
-  const CurrentIcon = ICONS[currentIconKey];
+  const CurrentIcon = ICONS[icon] || ICONS['activity'];
 
   const handleSave = () => {
     if (!name) return;
@@ -35,13 +36,10 @@ const HabitForm: React.FC<HabitFormProps> = ({ initialData, onSave, onClose }) =
       name,
       description,
       color,
-      icon: currentIconKey,
+      icon, // Use the icon state directly
       completedDates: initialData?.completedDates || []
     });
   };
-
-  const nextIcon = () => setIconIndex((prev) => (prev + 1) % ICON_KEYS.length);
-  const prevIcon = () => setIconIndex((prev) => (prev - 1 + ICON_KEYS.length) % ICON_KEYS.length);
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col bg-black/60 sm:bg-black/80 sm:backdrop-blur-md sm:items-center sm:justify-center">
@@ -56,20 +54,18 @@ const HabitForm: React.FC<HabitFormProps> = ({ initialData, onSave, onClose }) =
           <div className="w-10" /> {/* Spacer */}
         </div>
 
-        {/* Icon Picker */}
+        {/* Icon Picker Trigger */}
         <div className="flex flex-col items-center mb-8">
-          <div className="flex items-center gap-6">
-            {/* Invisible buttons for mobile alignment, visible interaction */}
-            <button onClick={prevIcon} className="text-white/50 hover:text-white transition-colors">
-              <ChevronLeft size={32} />
-            </button>
-            <div className={`w-24 h-24 rounded-full flex items-center justify-center ${COLORS[color]} transition-colors duration-300 shadow-xl shadow-black/50`}>
-              <CurrentIcon size={48} strokeWidth={2} />
+          <button
+            onClick={() => setShowIconPicker(true)}
+            className={`group relative w-24 h-24 rounded-full flex items-center justify-center ${COLORS[color]} transition-all duration-300 shadow-xl shadow-black/50 hover:scale-105 active:scale-95`}
+          >
+            <CurrentIcon size={48} strokeWidth={2} />
+            <div className="absolute -bottom-2 bg-white text-black text-[10px] font-bold px-2 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+              CHANGE
             </div>
-            <button onClick={nextIcon} className="text-white/50 hover:text-white transition-colors">
-              <ChevronRight size={32} />
-            </button>
-          </div>
+          </button>
+          <p className="mt-3 text-white/40 text-xs font-medium uppercase tracking-wider">Tap icon to change</p>
         </div>
 
         {/* Inputs */}
@@ -125,6 +121,17 @@ const HabitForm: React.FC<HabitFormProps> = ({ initialData, onSave, onClose }) =
           Save
         </button>
       </div>
+
+      {showIconPicker && (
+        <IconPicker
+          selectedIcon={icon}
+          onSelect={(newIcon) => {
+            setIcon(newIcon);
+            setShowIconPicker(false);
+          }}
+          onClose={() => setShowIconPicker(false)}
+        />
+      )}
     </div>
   );
 };
