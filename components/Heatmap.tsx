@@ -1,6 +1,7 @@
-import React, { useMemo, useRef, useEffect } from 'react';
+import React, { useMemo, useRef, useLayoutEffect } from 'react';
 import { HabitColor } from '../types';
 import { COLOR_Hex } from '../constants';
+import { getLocalDateString } from '../utils/dateUtils';
 
 interface HeatmapProps {
   completedDates: string[];
@@ -15,26 +16,42 @@ const DAY_LABELS = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 const Heatmap: React.FC<HeatmapProps> = ({ completedDates, color, days = 365, size = 'sm' }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Generate the last N days
+  // Generate the last N days, aligned to Monday-first weeks
   const gridData = useMemo(() => {
     const data = [];
     const today = new Date();
+    today.setHours(0, 0, 0, 0); // Normalize to start of day
 
-    // Create grid data for N days ending today
-    for (let i = 0; i < days; i++) {
-      const d = new Date();
-      d.setDate(today.getDate() - (days - 1 - i));
-      const dateStr = d.toISOString().split('T')[0];
+    // Calculate the oldest date we want to show (approximately N days ago)
+    const oldestDate = new Date(today);
+    oldestDate.setDate(today.getDate() - (days - 1));
+
+    // Find the Monday of the week containing the oldest date
+    // getDay() returns: 0=Sunday, 1=Monday, 2=Tuesday, etc.
+    const oldestDayOfWeek = oldestDate.getDay();
+    // Convert to Monday-first: Sunday (0) -> 6 days back, Monday (1) -> 0, Tuesday (2) -> 1, etc.
+    const daysFromMonday = oldestDayOfWeek === 0 ? 6 : oldestDayOfWeek - 1;
+
+    // Start from the Monday of that week (this ensures proper alignment)
+    const startDate = new Date(oldestDate);
+    startDate.setDate(oldestDate.getDate() - daysFromMonday);
+
+    // Generate all days from start Monday to today
+    const currentDate = new Date(startDate);
+    while (currentDate <= today) {
+      const dateStr = getLocalDateString(currentDate);
       data.push({
         date: dateStr,
         filled: completedDates.includes(dateStr)
       });
+      currentDate.setDate(currentDate.getDate() + 1);
     }
+
     return data;
   }, [days, completedDates]);
 
   // Scroll to the end (today) on mount or when data changes
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollLeft = scrollRef.current.scrollWidth;
     }

@@ -3,6 +3,7 @@ import { Habit } from '../types';
 import { ICONS, COLORS } from '../constants';
 import Heatmap from './Heatmap';
 import { Check } from 'lucide-react';
+import { getLocalDateString } from '../utils/dateUtils';
 
 interface HabitCardProps {
   habit: Habit;
@@ -12,7 +13,7 @@ interface HabitCardProps {
 
 const HabitCard: React.FC<HabitCardProps> = ({ habit, onToggle, onClick }) => {
   const IconComponent = ICONS[habit.icon] || ICONS['activity'];
-  const today = new Date().toISOString().split('T')[0];
+  const today = getLocalDateString();
   const isCompletedToday = habit.completedDates.includes(today);
 
   // Determine color class for the icon container

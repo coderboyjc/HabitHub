@@ -10,6 +10,7 @@ import DynamicIsland from './components/DynamicIsland';
 import WeeklyView from './components/WeeklyView';
 import MonthlyView from './components/MonthlyView';
 import JournalView from './components/JournalView';
+import { getLocalDateString } from './utils/dateUtils';
 
 const App: React.FC = () => {
   const [habits, setHabits] = useLocalStorage<Habit[]>('habithub-habits', INITIAL_HABITS);
@@ -63,7 +64,7 @@ const App: React.FC = () => {
     const newEntry: JournalEntry = {
       ...entry,
       id: Date.now().toString(),
-      createdAt: new Date().toISOString()
+      createdAt: getLocalDateString()
     };
     setJournalEntries(prev => [newEntry, ...prev]);
   };
