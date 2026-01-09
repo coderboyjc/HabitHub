@@ -111,7 +111,7 @@ const App: React.FC = () => {
               />
             ))}
             {habits.length === 0 && (
-              <div className="text-center py-20 text-zinc-600">
+              <div className="text-center py-20 text-white/50">
                 <p>No habits yet. Click + to start.</p>
               </div>
             )}
@@ -121,12 +121,12 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background text-zinc-100 font-sans pb-28 selection:bg-purple-500/30">
+    <div className="min-h-screen text-white font-sans pb-28 selection:bg-blue-500/30">
 
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-30 bg-background/80 backdrop-blur-md border-b border-zinc-800/50">
+      <header className="fixed top-0 left-0 right-0 z-30 glass-strong border-b border-white/10">
         <div className="max-w-2xl mx-auto px-4 h-16 flex items-center justify-between">
-          <button className="text-zinc-400 hover:text-white transition-colors">
+          <button className="text-white/70 hover:text-white transition-colors">
             <Settings size={24} />
           </button>
 
@@ -135,13 +135,13 @@ const App: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="hidden sm:block border border-zinc-700 rounded px-2 py-0.5 text-xs font-bold text-zinc-300">PRO</div>
-            <button className="text-zinc-400 hover:text-white transition-colors">
+            <div className="hidden sm:block glass rounded-full px-3 py-1 text-xs font-semibold text-white/80">PRO</div>
+            <button className="text-white/70 hover:text-white transition-colors">
               <BarChart2 size={24} />
             </button>
             <button
               onClick={() => { setActiveHabitId(null); setView('create'); }}
-              className="text-white hover:text-purple-400 transition-colors"
+              className="text-white hover:text-blue-400 transition-colors"
             >
               <Plus size={28} />
             </button>

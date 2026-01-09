@@ -44,12 +44,12 @@ const HabitForm: React.FC<HabitFormProps> = ({ initialData, onSave, onClose }) =
   const prevIcon = () => setIconIndex((prev) => (prev - 1 + ICON_KEYS.length) % ICON_KEYS.length);
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-background sm:bg-black/80 sm:backdrop-blur-sm sm:items-center sm:justify-center">
-      <div className="w-full h-full sm:h-auto sm:max-w-md bg-background sm:bg-card sm:rounded-3xl p-5 overflow-y-auto border border-zinc-800">
+    <div className="fixed inset-0 z-50 flex flex-col bg-black/60 sm:bg-black/80 sm:backdrop-blur-md sm:items-center sm:justify-center">
+      <div className="w-full h-full sm:h-auto sm:max-w-md glass-strong sm:rounded-3xl p-5 overflow-y-auto shadow-2xl shadow-black/50">
 
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
-          <button onClick={onClose} className="p-2 hover:bg-zinc-800 rounded-full text-zinc-400">
+          <button onClick={onClose} className="p-2 hover:bg-white/10 rounded-full text-white/70 hover:text-white transition-colors">
             <X size={24} />
           </button>
           <h2 className="text-xl font-bold text-white">{initialData ? 'Edit Habit' : 'New Habit'}</h2>
@@ -60,13 +60,13 @@ const HabitForm: React.FC<HabitFormProps> = ({ initialData, onSave, onClose }) =
         <div className="flex flex-col items-center mb-8">
           <div className="flex items-center gap-6">
             {/* Invisible buttons for mobile alignment, visible interaction */}
-            <button onClick={prevIcon} className="text-zinc-600 hover:text-white transition-colors">
+            <button onClick={prevIcon} className="text-white/50 hover:text-white transition-colors">
               <ChevronLeft size={32} />
             </button>
             <div className={`w-24 h-24 rounded-full flex items-center justify-center ${COLORS[color]} transition-colors duration-300 shadow-xl shadow-black/50`}>
               <CurrentIcon size={48} strokeWidth={2} />
             </div>
-            <button onClick={nextIcon} className="text-zinc-600 hover:text-white transition-colors">
+            <button onClick={nextIcon} className="text-white/50 hover:text-white transition-colors">
               <ChevronRight size={32} />
             </button>
           </div>
@@ -75,30 +75,30 @@ const HabitForm: React.FC<HabitFormProps> = ({ initialData, onSave, onClose }) =
         {/* Inputs */}
         <div className="space-y-4 mb-8">
           <div>
-            <label className="block text-xs font-medium text-zinc-500 uppercase mb-1 ml-1">Name</label>
+            <label className="block text-xs font-medium text-white/60 uppercase mb-1 ml-1">Name</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g. Reading"
-              className="w-full bg-zinc-900 border border-zinc-800 rounded-xl p-4 text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-600 focus:ring-1 focus:ring-zinc-600 transition-all"
+              className="w-full glass rounded-xl p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-zinc-500 uppercase mb-1 ml-1">Description</label>
+            <label className="block text-xs font-medium text-white/60 uppercase mb-1 ml-1">Description</label>
             <input
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="e.g. Read 10 pages"
-              className="w-full bg-zinc-900 border border-zinc-800 rounded-xl p-4 text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-600 focus:ring-1 focus:ring-zinc-600 transition-all"
+              className="w-full glass rounded-xl p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
             />
           </div>
         </div>
 
         {/* Color Picker */}
         <div className="mb-8">
-          <label className="block text-xs font-medium text-zinc-500 uppercase mb-3 ml-1">Color</label>
+          <label className="block text-xs font-medium text-white/60 uppercase mb-3 ml-1">Color</label>
           <div className="grid grid-cols-6 gap-4 px-2">
             {COLOR_OPTIONS.map((c) => (
               <button
@@ -113,14 +113,14 @@ const HabitForm: React.FC<HabitFormProps> = ({ initialData, onSave, onClose }) =
         </div>
 
         <div className="flex justify-center mb-4">
-          <button className="text-zinc-500 text-sm flex items-center gap-1 hover:text-zinc-300">
+          <button className="text-white/50 text-sm flex items-center gap-1 hover:text-white/80 transition-colors">
             Advanced Options <ChevronRight size={14} className="rotate-90" />
           </button>
         </div>
 
         <button
           onClick={handleSave}
-          className="w-full bg-primary hover:bg-purple-600 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-purple-900/20"
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-blue-500/30"
         >
           Save
         </button>

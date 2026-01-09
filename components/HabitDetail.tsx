@@ -93,8 +93,8 @@ const HabitDetail: React.FC<HabitDetailProps> = ({ habit, onClose, onEdit, onTog
     const currentStreak = calculateStreak();
 
     return (
-        <div className="fixed inset-0 z-40 bg-background/95 backdrop-blur-sm flex items-center justify-center p-4">
-            <div className="w-full max-w-lg bg-card border border-zinc-800 rounded-[32px] overflow-hidden max-h-[95vh] overflow-y-auto no-scrollbar shadow-2xl">
+        <div className="fixed inset-0 z-40 bg-black/60 backdrop-blur-md flex items-center justify-center p-4">
+            <div className="w-full max-w-lg glass-strong rounded-[32px] overflow-hidden max-h-[95vh] overflow-y-auto no-scrollbar shadow-2xl">
 
                 {/* Header */}
                 <div className="p-6 pb-0 flex items-center justify-between">
@@ -104,54 +104,54 @@ const HabitDetail: React.FC<HabitDetailProps> = ({ habit, onClose, onEdit, onTog
                         </div>
                         <div>
                             <h2 className="text-2xl font-bold text-white">{habit.name}</h2>
-                            <p className="text-zinc-400 font-medium">{habit.description}</p>
+                            <p className="text-white/60 font-medium">{habit.description}</p>
                         </div>
                     </div>
-                    <button onClick={onClose} className="w-10 h-10 bg-zinc-800 rounded-full flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-700 transition-all">
+                    <button onClick={onClose} className="w-10 h-10 glass rounded-full flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-all">
                         <X size={20} />
                     </button>
                 </div>
 
                 {/* Large Heatmap */}
                 <div className="p-6">
-                    <div className="bg-background/50 rounded-2xl p-4 border border-zinc-800/50">
+                    <div className="glass rounded-2xl p-4">
                         <Heatmap completedDates={habit.completedDates} color={habit.color} size="lg" />
                     </div>
                 </div>
 
                 {/* Stats Row */}
                 <div className="px-6 flex gap-3 mb-8">
-                    <div className="flex-1 bg-zinc-800/40 border border-zinc-800 rounded-2xl p-3 flex items-center gap-3">
-                        <span className="text-zinc-500 text-sm font-medium">No Streak Goal</span>
+                    <div className="flex-1 glass rounded-2xl p-3 flex items-center gap-3">
+                        <span className="text-white/50 text-sm font-medium">No Streak Goal</span>
                     </div>
-                    <div className="bg-zinc-800/40 border border-zinc-800 rounded-2xl p-3 px-5 flex items-center gap-2">
-                        <Flame size={20} className={currentStreak > 0 ? 'text-orange-500 fill-orange-500' : 'text-zinc-600'} />
+                    <div className="glass rounded-2xl p-3 px-5 flex items-center gap-2">
+                        <Flame size={20} className={currentStreak > 0 ? 'text-orange-500 fill-orange-500' : 'text-white/30'} />
                         <span className="text-white font-bold">{currentStreak}</span>
                     </div>
-                    <button onClick={onEdit} className="w-12 h-12 bg-zinc-800/40 border border-zinc-800 rounded-2xl flex items-center justify-center text-zinc-400 hover:bg-zinc-700 hover:text-white transition-all">
+                    <button onClick={onEdit} className="w-12 h-12 glass rounded-2xl flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-all">
                         <Edit2 size={20} />
                     </button>
                     <div className="relative" ref={dropdownRef}>
                         <button
                             onClick={() => setShowDropdown(!showDropdown)}
-                            className="w-12 h-12 bg-zinc-800/40 border border-zinc-800 rounded-2xl flex items-center justify-center text-zinc-400 hover:bg-zinc-700 hover:text-white transition-all"
+                            className="w-12 h-12 glass rounded-2xl flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-all"
                         >
                             <Settings size={20} />
                         </button>
 
                         {/* Dropdown Menu */}
                         {showDropdown && (
-                            <div className="absolute right-0 mt-2 w-48 bg-zinc-900 border border-zinc-800 rounded-2xl shadow-2xl overflow-hidden z-50">
+                            <div className="absolute right-0 mt-2 w-48 glass-strong rounded-2xl shadow-2xl overflow-hidden z-50">
                                 <button
                                     onClick={handleArchive}
-                                    className="w-full px-4 py-3 flex items-center gap-3 text-left text-zinc-300 hover:bg-zinc-800 transition-colors"
+                                    className="w-full px-4 py-3 flex items-center gap-3 text-left text-white/80 hover:bg-white/10 transition-colors"
                                 >
                                     <Archive size={18} />
                                     <span className="font-medium">Archive</span>
                                 </button>
                                 <button
                                     onClick={handleDeleteClick}
-                                    className="w-full px-4 py-3 flex items-center gap-3 text-left text-red-400 hover:bg-zinc-800 transition-colors border-t border-zinc-800"
+                                    className="w-full px-4 py-3 flex items-center gap-3 text-left text-red-400 hover:bg-white/10 transition-colors border-t border-white/10"
                                 >
                                     <Trash2 size={18} />
                                     <span className="font-medium">Delete</span>
@@ -173,19 +173,19 @@ const HabitDetail: React.FC<HabitDetailProps> = ({ habit, onClose, onEdit, onTog
 
             {/* Delete Confirmation Modal */}
             {showDeleteConfirm && (
-                <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-                    <div className="w-full max-w-sm bg-zinc-900 border border-zinc-800 rounded-3xl p-6 shadow-2xl">
-                        <div className="flex items-center justify-center w-14 h-14 bg-red-500/10 border border-red-500/20 rounded-2xl mx-auto mb-4">
+                <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4">
+                    <div className="w-full max-w-sm glass-strong rounded-3xl p-6 shadow-2xl">
+                        <div className="flex items-center justify-center w-14 h-14 bg-red-500/20 border border-red-500/30 rounded-2xl mx-auto mb-4">
                             <Trash2 size={24} className="text-red-500" />
                         </div>
                         <h3 className="text-xl font-bold text-white text-center mb-2">Delete Habit?</h3>
-                        <p className="text-zinc-400 text-center mb-6">
+                        <p className="text-white/60 text-center mb-6">
                             Are you sure you want to delete <span className="text-white font-semibold">"{habit.name}"</span>? Once deleted, all data will be lost and cannot be recovered.
                         </p>
                         <div className="flex gap-3">
                             <button
                                 onClick={handleCancelDelete}
-                                className="flex-1 px-4 py-3 bg-zinc-800 hover:bg-zinc-700 text-white font-semibold rounded-2xl transition-colors"
+                                className="flex-1 px-4 py-3 glass hover:bg-white/10 text-white font-semibold rounded-2xl transition-colors"
                             >
                                 Cancel
                             </button>

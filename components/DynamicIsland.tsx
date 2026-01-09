@@ -23,7 +23,7 @@ const DynamicIsland: React.FC<DynamicIslandProps> = ({ activeScreen, onScreenCha
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 blur-xl rounded-full" />
 
                 {/* Main glass island */}
-                <div className="relative flex items-center gap-1 p-1.5 bg-zinc-900/70 backdrop-blur-xl border border-zinc-700/50 rounded-full shadow-2xl shadow-black/50">
+                <div className="relative flex items-center gap-1 p-1.5 glass-strong rounded-full shadow-2xl shadow-black/50">
                     {navItems.map((item) => {
                         const Icon = item.icon;
                         const isActive = activeScreen === item.id;
@@ -35,8 +35,8 @@ const DynamicIsland: React.FC<DynamicIslandProps> = ({ activeScreen, onScreenCha
                                 className={`
                   relative flex items-center justify-center gap-2 px-4 py-2.5 rounded-full transition-all duration-300 ease-out
                   ${isActive
-                                        ? 'bg-white/15 text-white shadow-lg'
-                                        : 'text-zinc-500 hover:text-zinc-300 hover:bg-white/5'
+                                        ? 'bg-white/20 text-white shadow-lg'
+                                        : 'text-white/60 hover:text-white/90 hover:bg-white/10'
                                     }
                 `}
                             >

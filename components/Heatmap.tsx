@@ -47,13 +47,13 @@ const Heatmap: React.FC<HeatmapProps> = ({ completedDates, color, days = 365, si
   return (
     <div className="w-full flex pt-1 pb-1">
       {/* Sticky labels column */}
-      <div className={`sticky left-0 z-10 bg-card flex flex-col ${gapClass} pr-1`}>
+      <div className={`sticky left-0 z-10 flex flex-col ${gapClass} pr-1`}>
         {DAY_LABELS.map((label, index) => (
           <div
             key={index}
-            className={`${squareSizeClass} rounded-sm flex items-center justify-center text-zinc-500 text-[7px] font-medium leading-none`}
+            className={`${squareSizeClass} rounded-sm flex items-center justify-center text-white/40 text-[7px] font-medium leading-none`}
             style={{
-              backgroundColor: '#27272a' // zinc-800 - matches empty heatmap squares
+              backgroundColor: 'rgba(255, 255, 255, 0.05)' // Subtle glass effect matching empty squares
             }}
           >
             {label}
@@ -72,7 +72,7 @@ const Heatmap: React.FC<HeatmapProps> = ({ completedDates, color, days = 365, si
               key={day.date}
               className={`relative rounded-sm transition-colors duration-300 ${squareSizeClass}`}
               style={{
-                backgroundColor: day.filled ? activeColor : '#27272a' // zinc-800
+                backgroundColor: day.filled ? activeColor : 'rgba(255, 255, 255, 0.05)' // Subtle glass effect for empty squares
               }}
             />
           ))}

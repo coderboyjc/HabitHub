@@ -25,7 +25,7 @@ const HabitCard: React.FC<HabitCardProps> = ({ habit, onToggle, onClick }) => {
 
   return (
     <div
-      className="bg-card rounded-2xl p-2 sm:p-4 border border-zinc-800/50 hover:border-zinc-700 transition-all group"
+      className="glass rounded-2xl p-2 sm:p-4 shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 transition-all duration-300 group hover:bg-white/10"
     >
       <div
         onClick={() => onClick(habit)}
@@ -45,7 +45,7 @@ const HabitCard: React.FC<HabitCardProps> = ({ habit, onToggle, onClick }) => {
           onClick={handleCheck}
           className={`
             w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300
-            ${isCompletedToday ? '' : 'bg-zinc-800/50 hover:bg-zinc-800 text-zinc-600'}
+            ${isCompletedToday ? '' : 'glass hover:bg-white/10 text-zinc-400'}
           `}
           style={isCompletedToday ? { backgroundColor: colorClass.split(' ')[0].replace('bg-', 'var(--tw-colors-') } : {}}
         >
