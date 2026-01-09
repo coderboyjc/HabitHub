@@ -51,7 +51,7 @@ const Heatmap: React.FC<HeatmapProps> = ({ completedDates, color, days = 365, si
         {DAY_LABELS.map((label, index) => (
           <div
             key={index}
-            className={`${squareSizeClass} rounded-sm flex items-center justify-center text-zinc-500 text-[7px] font-medium`}
+            className={`${squareSizeClass} rounded-sm flex items-center justify-center text-zinc-500 text-[7px] font-medium leading-none`}
             style={{
               backgroundColor: '#27272a' // zinc-800 - matches empty heatmap squares
             }}
