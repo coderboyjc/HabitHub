@@ -4,3 +4,9 @@ export const getLocalDateString = (date: Date = new Date()): string => {
     const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
 };
+
+export const isFutureDate = (date: Date | string): boolean => {
+    const todayStr = getLocalDateString();
+    const checkStr = typeof date === 'string' ? date : getLocalDateString(date);
+    return checkStr > todayStr;
+};

@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { ChevronLeft, ChevronRight, Check } from 'lucide-react';
 import { Habit } from '../types';
 import { ICONS, COLOR_Hex, COLORS } from '../constants';
-import { getLocalDateString } from '../utils/dateUtils';
+import { getLocalDateString, isFutureDate } from '../utils/dateUtils';
 
 interface WeeklyViewProps {
     habits: Habit[];
@@ -130,18 +130,20 @@ const WeeklyView: React.FC<WeeklyViewProps> = ({ habits, onToggle }) => {
                                 {getWeekDays.map((day, i) => {
                                     const dateStr = formatDate(day);
                                     const isCompleted = habit.completedDates.includes(dateStr);
+                                    const isFuture = isFutureDate(day);
+
 
                                     return (
                                         <button
                                             key={i}
-                                            onClick={() => onToggle(habit.id, dateStr)}
+                                            onClick={() => !isFuture && onToggle(habit.id, dateStr)}
                                             className={`
-                                        aspect-square rounded sm:rounded-lg flex items-center justify-center transition-all duration-200
-                                        ${isCompleted
+                                         aspect-square rounded sm:rounded-lg flex items-center justify-center transition-all duration-200
+                                         ${isCompleted
                                                     ? 'shadow-md scale-95 sm:scale-100'
-                                                    : 'bg-zinc-800/30 border border-zinc-700/30 hover:border-zinc-600'
+                                                    : `bg-zinc-800/30 border border-zinc-700/30 ${isFuture ? 'cursor-default' : 'hover:border-zinc-600'}`
                                                 }
-                                    `}
+                                     `}
                                             style={{
                                                 backgroundColor: isCompleted ? colorHex : undefined,
                                             }}

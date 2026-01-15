@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { ChevronLeft, ChevronRight, Check } from 'lucide-react';
 import { Habit } from '../types';
 import { ICONS, COLOR_Hex } from '../constants';
-import { getLocalDateString } from '../utils/dateUtils';
+import { getLocalDateString, isFutureDate } from '../utils/dateUtils';
 
 interface MonthlyViewProps {
     habits: Habit[];
@@ -123,13 +123,15 @@ const HabitMonthCard: React.FC<HabitMonthCardProps> = ({ habit, monthData, onTog
                     const isCompleted = habit.completedDates.includes(dateStr);
                     const isToday = getLocalDateString() === dateStr;
 
+                    const isFuture = isFutureDate(day);
+
                     return (
                         <button
                             key={dateStr}
-                            onClick={() => onToggle(habit.id, dateStr)}
+                            onClick={() => !isFuture && onToggle(habit.id, dateStr)}
                             className={`
                                 aspect-square rounded-[3px] transition-all duration-200
-                                ${isCompleted ? '' : 'bg-zinc-800/40 hover:bg-zinc-700/60'}
+                                ${isCompleted ? '' : `bg-zinc-800/40 ${isFuture ? 'cursor-default' : 'hover:bg-zinc-700/60'}`}
                                 ${isToday && !isCompleted ? 'ring-1 ring-zinc-500/50' : ''}
                             `}
                             style={{
@@ -155,8 +157,8 @@ const HabitMonthCard: React.FC<HabitMonthCardProps> = ({ habit, monthData, onTog
             >
                 <div
                     className={`w-4 h-4 rounded-full flex items-center justify-center transition-colors ${habit.completedDates.includes(getLocalDateString())
-                            ? 'bg-white'
-                            : 'bg-zinc-700/50'
+                        ? 'bg-white'
+                        : 'bg-zinc-700/50'
                         }`}
                 >
                     <Check
@@ -168,8 +170,8 @@ const HabitMonthCard: React.FC<HabitMonthCardProps> = ({ habit, monthData, onTog
                 </div>
                 {completionsInMonth > 0 && (
                     <span className={`text-[10px] font-bold ${habit.completedDates.includes(getLocalDateString())
-                            ? 'text-white'
-                            : 'text-white/90'
+                        ? 'text-white'
+                        : 'text-white/90'
                         }`}>
                         × {completionsInMonth}
                     </span>
