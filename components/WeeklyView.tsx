@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { ChevronLeft, ChevronRight, Check } from 'lucide-react';
 import { Habit } from '../types';
 import { ICONS, COLOR_Hex, COLORS } from '../constants';
+import { getLocalDateString } from '../utils/dateUtils';
 
 interface WeeklyViewProps {
     habits: Habit[];
@@ -30,12 +31,8 @@ const WeeklyView: React.FC<WeeklyViewProps> = ({ habits, onToggle }) => {
         return days;
     }, [weekOffset]);
 
-    const formatDate = (date: Date) => date.toISOString().split('T')[0];
-
-    const isToday = (date: Date) => {
-        const today = new Date();
-        return date.toDateString() === today.toDateString();
-    };
+    const formatDate = (date: Date) => getLocalDateString(date);
+    const isToday = (date: Date) => getLocalDateString(date) === getLocalDateString();
 
     const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
