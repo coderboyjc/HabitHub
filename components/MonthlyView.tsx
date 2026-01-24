@@ -131,9 +131,9 @@ const HabitMonthCard: React.FC<HabitMonthCardProps> = ({ habit, monthData, onTog
                             onClick={() => !isFuture && onToggle(habit.id, dateStr)}
                             className={`
                                 aspect-square rounded-[3px] transition-all duration-200
-                                ${isCompleted ? '' : `bg-zinc-800/40 ${isFuture ? 'cursor-default' : 'hover:bg-zinc-700/60'}`}
-                                ${isToday && !isCompleted ? 'ring-1 ring-zinc-500/50' : ''}
-                            `}
+                                    ${isCompleted ? '' : `bg-zinc-800/40 ${isFuture ? 'cursor-default' : 'hover:bg-zinc-700/60'}`}
+                                    ${isToday ? 'ring-2 ring-white/30 ring-offset-1 ring-offset-[#1c1c1e]' : ''}
+                                `}
                             style={{
                                 backgroundColor: isCompleted ? colorHex : undefined
                             }}

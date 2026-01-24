@@ -154,7 +154,7 @@ const Calendar: React.FC<CalendarProps> = ({ completedDates, color, viewMode = '
                 className={`
                     w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-sm font-medium transition-all
                     ${isCompleted ? 'text-zinc-950 font-bold' : 'text-zinc-400 hover:bg-zinc-800'}
-                    ${isCurrentDay && !isCompleted ? 'border border-zinc-500 text-white' : ''}
+                    ${isCurrentDay ? 'ring-2 ring-white/50 ring-offset-2 ring-offset-zinc-950' : ''}
                 `}
                 style={{
                   backgroundColor: isCompleted ? activeColor : 'transparent'

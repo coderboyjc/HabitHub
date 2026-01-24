@@ -84,15 +84,18 @@ const Heatmap: React.FC<HeatmapProps> = ({ completedDates, color, days = 365, si
         className="flex-1 overflow-x-auto no-scrollbar"
       >
         <div className={`grid grid-rows-7 grid-flow-col ${gapClass} w-max px-1`}>
-          {gridData.map((day) => (
-            <div
-              key={day.date}
-              className={`relative rounded-sm transition-colors duration-300 ${squareSizeClass}`}
-              style={{
-                backgroundColor: day.filled ? activeColor : 'rgba(255, 255, 255, 0.05)' // Subtle glass effect for empty squares
-              }}
-            />
-          ))}
+          {gridData.map((day) => {
+            const isToday = day.date === getLocalDateString();
+            return (
+              <div
+                key={day.date}
+                className={`relative rounded-sm transition-colors duration-300 ${squareSizeClass} ${isToday ? 'ring-1 ring-white/50 ring-offset-[1px] ring-offset-[#09090b]' : ''}`}
+                style={{
+                  backgroundColor: day.filled ? activeColor : 'rgba(255, 255, 255, 0.05)' // Subtle glass effect for empty squares
+                }}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

@@ -133,6 +133,8 @@ const WeeklyView: React.FC<WeeklyViewProps> = ({ habits, onToggle }) => {
                                     const isFuture = isFutureDate(day);
 
 
+                                    const isCurrentDay = isToday(day);
+
                                     return (
                                         <button
                                             key={i}
@@ -143,6 +145,7 @@ const WeeklyView: React.FC<WeeklyViewProps> = ({ habits, onToggle }) => {
                                                     ? 'shadow-md scale-95 sm:scale-100'
                                                     : `bg-zinc-800/30 border border-zinc-700/30 ${isFuture ? 'cursor-default' : 'hover:border-zinc-600'}`
                                                 }
+                                         ${isCurrentDay ? 'ring-2 ring-white/40 ring-offset-1 ring-offset-zinc-900' : ''}
                                      `}
                                             style={{
                                                 backgroundColor: isCompleted ? colorHex : undefined,
