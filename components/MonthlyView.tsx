@@ -113,7 +113,7 @@ const HabitMonthCard: React.FC<HabitMonthCardProps> = ({ habit, monthData, onTog
             </div>
 
             {/* Calendar Grid */}
-            <div className="grid grid-cols-7 gap-[3px]">
+            <div className="grid grid-cols-7 gap-[3px] py-1">
                 {monthData.days.map((day, i) => {
                     if (!day) {
                         return <div key={`empty-${i}`} className="aspect-square" />;

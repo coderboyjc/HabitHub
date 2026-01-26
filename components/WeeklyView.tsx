@@ -126,7 +126,7 @@ const WeeklyView: React.FC<WeeklyViewProps> = ({ habits, onToggle }) => {
                             </div>
 
                             {/* Checkboxes Grid */}
-                            <div className="grid grid-cols-7 gap-1 sm:gap-2 w-[180px] sm:w-full sm:max-w-[400px]">
+                            <div className="grid grid-cols-7 gap-1 sm:gap-2 w-[180px] sm:w-full sm:max-w-[400px] py-1">
                                 {getWeekDays.map((day, i) => {
                                     const dateStr = formatDate(day);
                                     const isCompleted = habit.completedDates.includes(dateStr);

@@ -135,7 +135,7 @@ const Calendar: React.FC<CalendarProps> = ({ completedDates, color, viewMode = '
       </div>
 
       {/* Days Grid */}
-      <div className={`grid grid-cols-7 gap-y-4 gap-x-2 text-center content-start ${viewMode === 'month' ? 'min-h-[240px]' : ''}`}>
+      <div className={`grid grid-cols-7 gap-y-4 gap-x-2 text-center content-start ${viewMode === 'month' ? 'min-h-[240px]' : ''} py-1`}>
         {days.map((day, i) => {
           if (!day) return <div key={`placeholder-${i}`} />;
 

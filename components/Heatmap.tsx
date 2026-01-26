@@ -64,7 +64,7 @@ const Heatmap: React.FC<HeatmapProps> = ({ completedDates, color, days = 365, si
   return (
     <div className="w-full flex pt-1 pb-1">
       {/* Sticky labels column */}
-      <div className={`sticky left-0 z-10 flex flex-col ${gapClass} pr-1`}>
+      <div className={`sticky left-0 z-10 flex flex-col ${gapClass} pr-1 py-1`}>
         {DAY_LABELS.map((label, index) => (
           <div
             key={index}
@@ -83,13 +83,13 @@ const Heatmap: React.FC<HeatmapProps> = ({ completedDates, color, days = 365, si
         ref={scrollRef}
         className="flex-1 overflow-x-auto no-scrollbar"
       >
-        <div className={`grid grid-rows-7 grid-flow-col ${gapClass} w-max px-1`}>
+        <div className={`grid grid-rows-7 grid-flow-col ${gapClass} w-max px-1 py-1`}>
           {gridData.map((day) => {
             const isToday = day.date === getLocalDateString();
             return (
               <div
                 key={day.date}
-                className={`relative rounded-sm transition-colors duration-300 ${squareSizeClass} ${isToday ? 'ring-1 ring-white/50 ring-offset-[1px] ring-offset-[#09090b]' : ''}`}
+                className={`relative rounded-sm transition-colors duration-300 ${squareSizeClass} ${isToday ? 'ring-1 ring-white/60 ring-offset-[1px] ring-offset-[#1a1a2e]' : ''}`}
                 style={{
                   backgroundColor: day.filled ? activeColor : 'rgba(255, 255, 255, 0.05)' // Subtle glass effect for empty squares
                 }}
